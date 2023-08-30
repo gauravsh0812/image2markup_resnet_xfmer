@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 .PHONY: help
 help:
 	@echo "Commands:"
@@ -17,7 +19,7 @@ install:
 
 .PHONY: install-dev
 install-dev:
-	python -m pip install -e ".[dev]" --no-cache-dir
+	python3 -m pip install -e ".[dev]" --no-cache-dir
 	pre-commit install
 	pre-commit autoupdate
 

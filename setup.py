@@ -15,11 +15,11 @@ with open(Path(BASE_DIR, "requirements.txt")) as file:
 
 
 dev_packages = [
-    "black==21.5b1",
-    "flake8==3.9.2",
-    "isort==5.8.0",
-    "mypy==0.812",
-    "pre-commit==2.13.0",
+    "black==23.7.0",
+    "flake8==6.1.0",
+    "isort==5.12.0",
+    "mypy==1.5.1",
+    "pre-commit==3.3.3",
 ]
 
 
@@ -45,6 +45,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
     ],
+    packages=["api", "conf", "figures", "streamlit", "image_to_latex"],
     python_requires=">=3.6",
     install_requires=[required_packages],
     extras_require={
