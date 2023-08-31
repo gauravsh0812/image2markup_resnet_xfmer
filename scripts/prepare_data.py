@@ -6,11 +6,11 @@ import image_to_latex.data.utils as utils
 
 
 METADATA = {
-    "im2latex_formulas.norm.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_formulas.norm.lst",
-    "im2latex_validate_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_validate_filter.lst",
-    "im2latex_train_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_train_filter.lst",
-    "im2latex_test_filter.lst": "http://lstm.seas.harvard.edu/latex/data/im2latex_test_filter.lst",
-    "formula_images.tar.gz": "http://lstm.seas.harvard.edu/latex/data/formula_images.tar.gz",
+    "im2latex_formulas.norm.lst": "https://im2markup.yuntiandeng.com/data/im2latex_formulas.norm.lst",
+    "im2latex_validate_filter.lst": "https://im2markup.yuntiandeng.com/data/im2latex_validate_filter.lst",
+    "im2latex_train_filter.lst": "https://im2markup.yuntiandeng.com/data/im2latex_train_filter.lst",
+    "im2latex_test_filter.lst": "https://im2markup.yuntiandeng.com/data/im2latex_test_filter.lst",
+    "formula_images.tar.gz": "https://im2markup.yuntiandeng.com/data/formula_images.tar.gz",
 }
 PROJECT_DIRNAME = Path(__file__).resolve().parents[1]
 DATA_DIRNAME = PROJECT_DIRNAME / "data"
