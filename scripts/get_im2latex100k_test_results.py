@@ -13,12 +13,6 @@ from image_to_latex.lit_models import LitResNetTransformer
 project_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 data_dir = os.path.join(project_dir, "data")
 
-# Load model
-lit_model = LitResNetTransformer.load_from_checkpoint("artifacts/model.ckpt")
-lit_model.freeze()
-
-# Load transform
-transform = ToTensorV2()
 
 with open(os.path.join(data_dir, "im2latex_test_filter.lst"), "r") as f:
     test_entries = f.readlines()
@@ -28,7 +22,7 @@ with open(os.path.join(data_dir, "im2latex_formulas.norm.new.lst"), "r") as f:
     formulae = f.readlines()
 
 
-def predict(img_path: str) -> str:
+def predict(img_path: str, lit_model, transform) -> str:
     # Transform image
     image = Image.open(img_path).convert("L")
     image_tensor = transform(image=np.array(image))["image"]
@@ -40,7 +34,9 @@ def predict(img_path: str) -> str:
     return decoded_str
 
 
-def collect_predictions(pid: int, test_data: list):
+def collect_predictions(
+    pid: int, test_data: list, lit_model: LitResNetTransformer, transform: ToTensorV2
+):
     results = {}
     errors = {}
     for img_name, line_no in test_data:
@@ -49,7 +45,7 @@ def collect_predictions(pid: int, test_data: list):
         if os.path.exists(img_path):
             try:
                 ground_truth = formulae[line_no]
-                prediction = predict(img_path)
+                prediction = predict(img_path, lit_model, transform)
                 results[img_name.rstrip(".png")] = (ground_truth, prediction)
             except Exception as e:
                 errors[img_name.rstrip(".png")] = e
@@ -60,6 +56,13 @@ def collect_predictions(pid: int, test_data: list):
 
 
 if __name__ == "__main__":
+    # Load model
+    lit_model = LitResNetTransformer.load_from_checkpoint("artifacts/model.ckpt")
+    lit_model.freeze()
+
+    # Load transform
+    transform = ToTensorV2()
+
     start_time = time.perf_counter()
 
     # Split test data into n chunks and run each chunk in parallel with Pool
@@ -69,8 +72,10 @@ if __name__ == "__main__":
         test_data[i : i + chunk_size] for i in range(0, len(test_data), chunk_size)
     ]
     with multiprocessing.Pool(n) as pool:
-        results = pool.starmap(collect_predictions, enumerate(chunks))
-
+        results = pool.starmap(
+            collect_predictions,
+            [(i, c, lit_model, transform) for i, c in enumerate(chunks)],
+        )
     # Merge results
     all_results = {}
     all_errors = {}
