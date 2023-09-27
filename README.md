@@ -4,6 +4,9 @@ An application that maps an image of a LaTeX math equation to LaTeX code.
 
 This is a fork that works exactly like the original, but updated to work with Python 3.10 since the original repo is no longer maintained and newer GPUs require newer Lightning versions. It also fixes a minor bug where Makefiles don't support source with `/bin/sh`, so I explicitly set its shell to bash. These changes also fix [a longstanding issue on the original repo related to using an older Python version](https://github.com/kingyiusuen/image-to-latex/issues/20). I did, however, get rid of the api, streamlit and docker since I didn't need them.
 
+My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/0j8ke3m8
+Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
+
 ## How To Use
 
 ### Prerequisites
@@ -45,10 +48,10 @@ To use or test the model, you may use either my best run or your own run. Follow
 
 ```bash
 # Download the best model checkpoint from W&B
-python scripts/download_checkpoint.py ternary-operators/image-to-latex/0j8ke3m8
+python3 scripts/download_checkpoint.py ternary-operators/image-to-latex/0j8ke3m8
 
 # Run the model on an image
-python scripts/test.py --image_path data/test/images/abcd.png
+python3 scripts/test.py --image_path data/test/images/abcd.png
 ```
 
 The results will be printed to the console.
@@ -91,7 +94,7 @@ You can download the best model checkpoint from W&B using the following command:
 
 ```
 
-python scripts/download_checkpoint.py RUN_PATH
+python3 scripts/download_checkpoint.py RUN_PATH
 
 ```
 
