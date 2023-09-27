@@ -2,7 +2,9 @@
 
 An application that maps an image of a LaTeX math equation to LaTeX code.
 
-This is a fork that works exactly like the original, but updated to work with Python 3.10 since the original repo is no longer maintained and newer GPUs require newer Lightning versions. It also fixes a minor bug where Makefiles don't support source with `/bin/sh`, so I explicitly set its shell to bash. These changes also fix [a longstanding issue on the original repo related to using an older Python version](https://github.com/kingyiusuen/image-to-latex/issues/20). I did, however, get rid of the api, streamlit and docker since I didn't need them.
+This is a fork that works exactly like the original, but updated to work with Python 3.10 since the original repo is no longer maintained and newer GPUs require newer Lightning versions. This also fixes [a longstanding issue on the original repo related to using an older Python version](https://github.com/kingyiusuen/image-to-latex/issues/20). In fact, since I moved everything to Conda and a bash script, the experience should be much smoother than the original repo.
+
+I did, however, get rid of the api, streamlit and docker since I didn't need them.
 
 My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/0j8ke3m8
 Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
