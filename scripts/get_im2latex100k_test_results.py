@@ -2,11 +2,23 @@ import json
 import multiprocessing
 import os
 import sys
+import time
 
-from scripts.test import test_img
+import numpy as np
+from albumentations.pytorch.transforms import ToTensorV2
+from PIL import Image
+
+from image_to_latex.lit_models import LitResNetTransformer
 
 project_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 data_dir = os.path.join(project_dir, "data")
+
+# Load model
+lit_model = LitResNetTransformer.load_from_checkpoint("artifacts/model.ckpt")
+lit_model.freeze()
+
+# Load transform
+transform = ToTensorV2()
 
 with open(os.path.join(data_dir, "im2latex_test_filter.lst"), "r") as f:
     test_entries = f.readlines()
@@ -14,6 +26,18 @@ with open(os.path.join(data_dir, "im2latex_test_filter.lst"), "r") as f:
 
 with open(os.path.join(data_dir, "im2latex_formulas.norm.new.lst"), "r") as f:
     formulae = f.readlines()
+
+
+def predict(img_path: str) -> str:
+    # Transform image
+    image = Image.open(img_path).convert("L")
+    image_tensor = transform(image=np.array(image))["image"]
+
+    # Predict
+    pred = lit_model.model.predict(image_tensor.unsqueeze(0).float())[0]
+    decoded = lit_model.tokenizer.decode(pred.tolist())
+    decoded_str = " ".join(decoded)
+    return decoded_str
 
 
 def collect_predictions(pid: int, test_data: list):
@@ -25,7 +49,7 @@ def collect_predictions(pid: int, test_data: list):
         if os.path.exists(img_path):
             try:
                 ground_truth = formulae[line_no]
-                prediction = test_img(img_path)
+                prediction = predict(img_path)
                 results[img_name.rstrip(".png")] = (ground_truth, prediction)
             except Exception as e:
                 errors[img_name.rstrip(".png")] = e
@@ -36,7 +60,8 @@ def collect_predictions(pid: int, test_data: list):
 
 
 if __name__ == "__main__":
-    test_data = test_data[:100]
+    start_time = time.perf_counter()
+
     # Split test data into n chunks and run each chunk in parallel with Pool
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     chunk_size = len(test_data) // n
@@ -65,3 +90,6 @@ if __name__ == "__main__":
 
     with open(os.path.join(results_dir, "im2latex100k_test_errors.json"), "w") as f:
         json.dump(all_errors, f, indent=4)
+
+    end_time = time.perf_counter()
+    print(f"Finished in {end_time - start_time} seconds.")

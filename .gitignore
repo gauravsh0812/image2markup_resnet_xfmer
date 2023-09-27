@@ -28,4 +28,3 @@ htmlcov
 .DS_Store
 *.egg-info
 artifacts
-results
