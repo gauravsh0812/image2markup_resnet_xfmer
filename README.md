@@ -11,7 +11,7 @@ Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
 
 ### Prerequisites
 
-Python 3.10: I recommend Conda to manage Python versions. You can install it [here](https://docs.conda.io/en/latest/miniconda.html).
+Miniconda: https://docs.conda.io/en/latest/miniconda.html
 
 ### Setup
 
@@ -22,24 +22,18 @@ git clone https://github.com/kingyiusuen/image-to-latex.git
 cd image-to-latex
 ```
 
-Then, create a virtual environment named `venv` and install required packages with:
+Assuming you have Miniconda installed, run the following command to install the required packages:
 
 ```
-make venv
+./install
 ```
 
-This will create the virtual environment and install the required packages in it, but the nature of Makefiles means that we will exit the actual shell the makefile used to create the environment after we are done setting it up. Therefore, we need to activate the environment manually:
+The install script will create and install the required packages in a virtual environment named `img2latex-env` that uses Python 3.10.
 
-On Mac/Linux:
-
-```
-source venv/bin/activate
-```
-
-On Windows:
+But, bash scripts create a new shell, so you will need to run the following command to activate the environment again before running of the scripts:
 
 ```
-venv\Scripts\activate.bat
+conda activate img2latex-env
 ```
 
 ### Using and/or Testing

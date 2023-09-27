@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Define the name of the Conda environment
+conda_env_name="img2latex-env"
+
+# Check if the Conda environment already exists
+echo "Checking if Conda environment $conda_env_name exists..."
+if ! conda info --envs | grep -q "$conda_env_name"; then
+    echo "Conda environment $conda_env_name does not exist. Creating it..."
+    # Create a Conda environment with Python 3.10 if it doesn't exist
+    conda create -y -n "$conda_env_name" python=3.10
+fi
+
+# Activate the Conda environment'
+echo "Activating Conda environment $conda_env_name..."
+eval "$(conda shell.bash hook)"
+conda activate "$conda_env_name"
+
+# do rest only if it worked
+if [ $? -ne 0 ]; then
+    echo "Failed to activate conda environment $conda_env_name"
+    exit 1
+fi
+
+# Upgrade pip, setuptools, and wheel in the Conda environment
+echo "Upgrading pip, setuptools, and wheel in Conda environment $conda_env_name..."
+pip install --upgrade pip setuptools wheel
+
+# Install the project in editable mode within the Conda environment
+echo "Installing project in editable mode within Conda environment $conda_env_name..."
+pip install -e . --no-cache-dir
+
+echo "---"
+echo "Done. Please run 'conda activate $conda_env_name' to activate the Conda environment before running any scripts."
+echo "---"
