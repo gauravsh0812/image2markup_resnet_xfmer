@@ -6,8 +6,10 @@ This is a fork that works exactly like the original, but updated to work with Py
 
 I did, however, get rid of the api, streamlit and docker since I didn't need them.
 
-My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/0j8ke3m8
-Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
+## Results
+
+- My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/0j8ke3m8
+- Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
 
 ## How To Use
 
