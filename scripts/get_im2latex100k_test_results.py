@@ -20,7 +20,7 @@ def collect_predictions(pid: int, test_data: list):
     results = {}
     errors = {}
     for img_name, line_no in test_data:
-        print(f"Processing image {img_name}...")
+        print(f"({pid}) Processing image {img_name}...")
         img_path = os.path.join(data_dir, "formula_images", img_name)
         if os.path.exists(img_path):
             try:
@@ -30,12 +30,13 @@ def collect_predictions(pid: int, test_data: list):
             except Exception as e:
                 errors[img_name.rstrip(".png")] = e
         else:
-            print(f"Image {img_path} does not exist. Skipping.")
+            print(f"({pid}) Image {img_path} does not exist. Skipping.")
 
     return results, errors
 
 
 if __name__ == "__main__":
+    test_data = test_data[:100]
     # Split test data into n chunks and run each chunk in parallel with Pool
     n = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     chunk_size = len(test_data) // n
