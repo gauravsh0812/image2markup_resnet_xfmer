@@ -4,6 +4,8 @@ import re
 import subprocess
 import tarfile
 
+from tqdm.auto import tqdm
+
 # List of URLs to download
 urls = [
     "https://im2markup.yuntiandeng.com/data/im2latex_formulas.norm.lst",
@@ -69,7 +71,7 @@ def preprocess_latex():
 
     print(f"Loaded {len(formulas)} formulas")
     print("Preprocessing LaTeX formulas...")
-    for i, formula in enumerate(formulas):
+    for i, formula in tqdm(enumerate(formulas), total=len(formulas)):
         # Ref: https://github.com/lukas-blecher/LaTeX-OCR/blob/main/pix2tex/dataset/preprocessing/preprocess_formulas.py
         # Replace split, align, etc. with aligned
         formula = re.sub(
