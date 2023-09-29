@@ -2,9 +2,10 @@ import os
 import subprocess
 from pathlib import Path
 
+from tqdm.auto import tqdm
+
 import image_to_latex.data.utils as utils
 from image_to_latex.data.utils import Tokenizer, get_all_formulas, get_split
-
 
 PROJECT_DIRNAME = Path(__file__).resolve().parents[1]
 DATA_DIRNAME = PROJECT_DIRNAME / "data"
@@ -16,14 +17,23 @@ CLEANED_FILE = "im2latex_formulas.norm.new.lst"
 
 def main():
     # Run adi_prepare_data.py to download and process the latex data
-    subprocess.run(["python3", os.path.join(PROJECT_DIRNAME, "scripts" ,"download_and_extract_data.py")], check=True)
+    subprocess.run(
+        [
+            "python3",
+            os.path.join(PROJECT_DIRNAME, "scripts", "download_and_extract_data.py"),
+        ],
+        check=True,
+    )
     os.chdir(DATA_DIRNAME)
 
     # Extract regions of interest
     if not PROCESSED_IMAGES_DIRNAME.exists():
         PROCESSED_IMAGES_DIRNAME.mkdir(parents=True, exist_ok=True)
         print("Cropping images...")
-        for image_filename in RAW_IMAGES_DIRNAME.glob("*.png"):
+        for image_filename in tqdm(
+            RAW_IMAGES_DIRNAME.glob("*.png"),
+            total=len(list(RAW_IMAGES_DIRNAME.glob("*.png"))),
+        ):
             cropped_image = utils.crop(image_filename, padding=8)
             if not cropped_image:
                 continue
