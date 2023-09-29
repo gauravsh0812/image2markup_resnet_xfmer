@@ -8,8 +8,8 @@ I did, however, get rid of the api, streamlit and docker since I didn't need the
 
 ## Results
 
-- My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/0j8ke3m8
-- Run Path: `ternary-operators/image-to-latex/0j8ke3m8`
+- My Best Run: https://wandb.ai/ternary-operators/image-to-latex/runs/69936gfr
+- Run Path: `ternary-operators/image-to-latex/69936gfr`
 
 ## How To Use
 
@@ -46,7 +46,7 @@ To use or test the model, you may use either my best run or your own run. Follow
 
 ```bash
 # Download the best model checkpoint from W&B
-python3 scripts/download_checkpoint.py ternary-operators/image-to-latex/0j8ke3m8
+python3 scripts/download_checkpoint.py --run_path ternary-operators/image-to-latex/69936gfr
 
 # Run the model on an image
 python3 scripts/test.py --image_path data/test/images/abcd.png
@@ -96,4 +96,4 @@ python3 scripts/download_checkpoint.py RUN_PATH
 
 ```
 
-Replace RUN_PATH with the path of your run (ex `ternary-operators/image-to-latex/0j8ke3m8`).
+Replace RUN_PATH with the path of your run (ex `ternary-operators/image-to-latex/69936gfr`).
