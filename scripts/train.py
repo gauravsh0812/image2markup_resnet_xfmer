@@ -28,7 +28,7 @@ def main(cfg: DictConfig):
     if cfg.logger:
         logger = WandbLogger(**cfg.logger)
 
-    trainer = Trainer(**cfg.trainer, callbacks=callbacks, logger=logger)
+    trainer = Trainer(**cfg.trainer, callbacks=callbacks, logger=logger, deterministic=True)
 
     if trainer.logger:
         trainer.logger.log_hyperparams(Namespace(**cfg))
