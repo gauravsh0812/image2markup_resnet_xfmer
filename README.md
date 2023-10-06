@@ -10,6 +10,7 @@ I did, however, get rid of the api, streamlit and docker since I didn't need the
 
 - My Best Run: https://wandb.ai/adioss/image-to-latex/runs/yd1cadrl
 - Run Path: `adioss/image-to-latex/yd1cadrl`
+- Drive Link: https://drive.google.com/drive/folders/1mrAksby1ljpUo7kdXY3u7SO1AvEV_QzI?usp=sharing (contains the best model checkpoint. You can download it from here if you don't want to use W&B)
 
 ## How To Use
 
