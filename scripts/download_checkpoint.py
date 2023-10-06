@@ -24,8 +24,8 @@ def main() -> None:
     parser.add_argument(
         "--run_path",
         type=str,
-        default="ternary-operators/image-to-latex/69936gfr",
-        help="Run path. Defaults to ternary-operators/image-to-latex/69936gfr",
+        default="adioss/image-to-latex/yd1cadrl",
+        help="Run path. Defaults to adioss/image-to-latex/yd1cadrl",
     )
     args = parser.parse_args()
     print(args)
