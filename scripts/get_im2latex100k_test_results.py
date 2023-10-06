@@ -6,9 +6,8 @@ import time
 
 import numpy as np
 from albumentations.pytorch.transforms import ToTensorV2
-from PIL import Image
-
 from image_to_latex.lit_models import LitResNetTransformer
+from PIL import Image
 
 project_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 data_dir = os.path.join(project_dir, "data")
@@ -90,14 +89,10 @@ if __name__ == "__main__":
     results_dir = os.path.join(project_dir, "results")
 
     # Save results
-    with open(
-        os.path.join(results_dir, "king_im2latex100k_test_results.json"), "w"
-    ) as f:
+    with open(os.path.join(results_dir, "im2latex100k_test_results.json"), "w") as f:
         json.dump(all_results, f, indent=4)
 
-    with open(
-        os.path.join(results_dir, "king_im2latex100k_test_errors.json"), "w"
-    ) as f:
+    with open(os.path.join(results_dir, "im2latex100k_test_errors.json"), "w") as f:
         json.dump(all_errors, f, indent=4)
 
     end_time = time.perf_counter()
