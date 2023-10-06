@@ -2,9 +2,9 @@
 
 An application that maps an image of a LaTeX math equation to LaTeX code.
 
-This is a fork that works exactly like the original, but updated to work with Python 3.10 since the original repo is no longer maintained and newer GPUs require newer Lightning versions. This also fixes [a longstanding issue on the original repo related to using an older Python version](https://github.com/kingyiusuen/image-to-latex/issues/20). In fact, since I moved everything to Conda and a bash script, the experience should be much smoother than the original repo.
+This is a fork that was updated to work with Python 3.10 since the original repo is no longer maintained and newer GPUs require newer Lightning versions. This also fixes [a longstanding issue on the original repo related to using an older Python version](https://github.com/kingyiusuen/image-to-latex/issues/20) by moving everything to a conda environment. It also trains the model on the [normalized Im2latex-100k dataset](https://im2markup.yuntiandeng.com/data/) that has been put through [some additional preprocessing](https://github.com/Adi-UA/image-to-latex/blob/main/scripts/download_and_extract_data.py#L68-L94).
 
-I did, however, get rid of the api, streamlit and docker since I didn't need them.
+I got rid of the api, streamlit and docker since I didn't need them.
 
 ## Results
 
@@ -98,3 +98,24 @@ python3 scripts/download_checkpoint.py RUN_PATH
 ```
 
 Replace RUN_PATH with the path of your run (ex `adioss/image-to-latex/yd1cadrl`).
+
+### Results
+
+The results of our best model on the test set have been saved to the `results` directory. It was created with the following commands:
+
+1. Activate the environment:
+
+   ```bash
+   conda activate img2latex-env
+   ```
+
+2. Download the best model checkpoint from W&B:
+
+   ```bash
+   python3 scripts/download_checkpoint.py # Default run path is adioss/image-to-latex/yd1cadrl
+   ```
+
+3. Run the evaluation script:
+   ```bash
+   python3 scripts/get_im2latex100k_test_results.py
+   ```
