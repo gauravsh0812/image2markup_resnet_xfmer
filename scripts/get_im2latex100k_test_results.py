@@ -6,8 +6,9 @@ import time
 
 import numpy as np
 from albumentations.pytorch.transforms import ToTensorV2
-from image_to_latex.lit_models import LitResNetTransformer
 from PIL import Image
+
+from image_to_latex.lit_models import LitResNetTransformer
 
 project_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 data_dir = os.path.join(project_dir, "data")
@@ -45,9 +46,10 @@ def collect_predictions(
             try:
                 ground_truth = formulae[line_no]
                 prediction = predict(img_path, lit_model, transform)
-                results[img_name.rstrip(".png")] = (ground_truth, prediction)
+                results[img_name.rstrip(".png")]["latex"] = prediction
+                results[img_name.rstrip(".png")]["ground_truth"] = ground_truth
             except Exception as e:
-                errors[img_name.rstrip(".png")] = e
+                errors[img_name.rstrip(".png")] = str(e)
         else:
             print(f"({pid}) Image {img_path} does not exist. Skipping.")
 
