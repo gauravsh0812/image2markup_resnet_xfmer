@@ -46,8 +46,10 @@ def collect_predictions(
             try:
                 ground_truth = formulae[line_no]
                 prediction = predict(img_path, lit_model, transform)
-                results[img_name.rstrip(".png")]["latex"] = prediction
-                results[img_name.rstrip(".png")]["ground_truth"] = ground_truth
+                results[img_name.rstrip(".png")] = {
+                    "ground_truth": ground_truth,
+                    "prediction": prediction,
+                }
             except Exception as e:
                 errors[img_name.rstrip(".png")] = str(e)
         else:
