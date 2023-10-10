@@ -30,6 +30,14 @@ pip install --upgrade pip setuptools wheel
 echo "Installing project in editable mode within Conda environment $conda_env_name..."
 pip install -e . --no-cache-dir
 
+echo "Updating LD_LIBRARY_PATH for CUDA"
+# use conda prefix environment variable and go 2 directories up  using dirname to start tghe find command from
+# then set LD_LIBRARY_PATH to the directory containing libcudnn using export
+# Remove duplicate file names before the last echo
+
+
 echo "---"
-echo "Done. Please run 'conda activate $conda_env_name' to activate the Conda environment before running any scripts."
+echo "Done."
+echo "Please run 'conda activate $conda_env_name' to activate the Conda environment before running any scripts."
+find "$(dirname "$(dirname "$CONDA_PREFIX")")" -name libcudnn.so* | xargs dirname | xargs dirname | xargs -I{} echo export LD_LIBRARY_PATH=\"{}\" | tail -n 1 | echo "Please run the following command to set LD_LIBRARY_PATH for CUDA AFTER activating the conda environment\n:" $(cat)
 echo "---"
