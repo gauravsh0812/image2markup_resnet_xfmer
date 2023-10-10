@@ -39,5 +39,5 @@ echo "Updating LD_LIBRARY_PATH for CUDA"
 echo "---"
 echo "Done."
 echo "Please run 'conda activate $conda_env_name' to activate the Conda environment before running any scripts."
-find "$(dirname "$(dirname "$CONDA_PREFIX")")" -name libcudnn.so* | xargs dirname | xargs dirname | xargs -I{} echo export LD_LIBRARY_PATH=\"{}\" | tail -n 1 | echo "Please run the following command to set LD_LIBRARY_PATH for CUDA AFTER activating the conda environment\n:" $(cat)
+find "$(dirname "$(dirname "$CONDA_PREFIX")")" -name libcudnn.so* | xargs dirname |  xargs -I{} echo export LD_LIBRARY_PATH=\"{}\" | tail -n 1 | echo "Then, run the following for CUDA to work:" $(cat)
 echo "---"
