@@ -30,9 +30,6 @@ data:
   num_workers: 16
   pin_memory: false
   max_output_len: 200
-  data_dirname: "/home/gauravs/data/resnet_xfmer"
-  equations_file_name: "im2latex.lst"
-  images_folder_name: "im2images"
 
 lit_model:
   # Optimizer
