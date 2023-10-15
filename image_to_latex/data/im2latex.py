@@ -26,7 +26,7 @@ class Im2Latex(LightningDataModule):
         batch_size: int = 8,
         num_workers: int = 0,
         pin_memory: bool = False,
-        max_output_len: int = 150,
+        max_output_len: int,
     ) -> None:
 
         super().__init__()
