@@ -211,7 +211,8 @@ def get_split(
 ) -> Tuple[List[str], List[List[str]]]:
     image_names = []
     formulas = []
-    print(filename)
+
+    print("==================" + filename)
     with open(filename) as f:
         for line in f:
             img_name, formula_idx = line.strip("\n").split()
