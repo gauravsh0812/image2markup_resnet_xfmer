@@ -41,7 +41,7 @@ def main():
     # Build vocabulary
     print("Building vocabulary...")
     all_formulas = get_all_formulas(CLEANED_FILE)
-    _, train_formulas = get_split(all_formulas, "train.lst")
+    _, train_formulas = get_split(all_formulas, f"{DATA_DIRNAME}/train.lst")
     tokenizer = Tokenizer()
     tokenizer.train(train_formulas)
     tokenizer.save(VOCAB_FILE)
