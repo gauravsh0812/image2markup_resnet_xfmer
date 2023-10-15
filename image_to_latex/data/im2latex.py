@@ -28,9 +28,10 @@ class Im2Latex(LightningDataModule):
         pin_memory: bool = False,
         data_dirname: str = "",
         equations_file_name: str = "",
-        image_folder_name: str = "",
+        images_folder_name: str = "",
         max_output_len: int = 150,
     ) -> None:
+
         super().__init__()
         self.batch_size = batch_size
         self.num_workers = num_workers
