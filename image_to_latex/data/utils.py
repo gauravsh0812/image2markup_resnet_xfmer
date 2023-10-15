@@ -135,7 +135,7 @@ class Tokenizer:
     def __len__(self):
         return len(self.token_to_index)
 
-    def train(self, formulas: List[List[str]], min_count: int = 2) -> None:
+    def train(self, formulas: List[List[str]], min_count: int = 5) -> None:
         """Create a mapping from tokens to indices and vice versa.
 
         Args:
