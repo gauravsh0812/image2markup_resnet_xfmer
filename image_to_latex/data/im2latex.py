@@ -26,7 +26,7 @@ class Im2Latex(LightningDataModule):
         batch_size: int = 8,
         num_workers: int = 0,
         pin_memory: bool = False,
-        data_path: str,
+        data_dirname: str,
         equations_file_name: str,
         image_folder_name: str
     ) -> None:
@@ -34,7 +34,7 @@ class Im2Latex(LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
-        self.data_dirname = data_path
+        self.data_dirname = data_dirname
         self.images_folder_name = images_folder_name
         self.equations_file_name = equations_file_name
 
