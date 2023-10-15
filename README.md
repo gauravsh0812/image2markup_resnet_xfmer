@@ -59,19 +59,14 @@ The results will be printed to the console.
 
 #### Data Preparation
 
-Run the following command to download and preprocess the data:
-
 ```
 
-python3 scripts/prepare_data.py
+python3 scripts/prepare_data.py \
+--data_path "/home/gauravs/data/resnet_xfmer" \
+--image_path "im2images" \
+--equations_file_name "im2latex.lst"
 
 ```
-
-This will:
-
-- Download the data to `data`.
-- Apply some preprocessing to normalize the LaTeX (in addition to the normalization applied by the original data owners)
-- Apply some preprocessing to normalize the images (in addition to the normalization applied by the original data owners). This involves making them greyscale, padding them and skipping the ones with no text.
 
 #### Actual Training
 
@@ -79,7 +74,8 @@ Run the following command to train the model:
 
 ```
 
-python3 scripts/train.py
+python3 scripts/train.py \
+
 
 ```
 

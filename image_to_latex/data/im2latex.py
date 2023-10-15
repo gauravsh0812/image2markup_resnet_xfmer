@@ -26,17 +26,24 @@ class Im2Latex(LightningDataModule):
         batch_size: int = 8,
         num_workers: int = 0,
         pin_memory: bool = False,
+        data_path: str,
+        equations_file_name: str,
+        image_folder_name: str
     ) -> None:
         super().__init__()
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
+        self.data_dirname = data_path
+        self.images_folder_name = images_folder_name
+        self.equations_file_name = equations_file_name
 
-        self.data_dirname = Path(__file__).resolve().parents[2] / "data"
-        self.vocab_file = Path(__file__).resolve().parent / "vocab.json"
-        formula_file = self.data_dirname / "im2latex_formulas.norm.new.lst"
+        self.vocab_file = "vocab.json"
+        formula_file = self.data_dirname / self.equations_file_name
+
         if not formula_file.is_file():
             raise FileNotFoundError("Did you run scripts/prepare_data.py?")
+
         self.all_formulas = get_all_formulas(formula_file)
         self.transform = {
             "train": A.Compose(
@@ -52,7 +59,7 @@ class Im2Latex(LightningDataModule):
 
     @property
     def processed_images_dirname(self):
-        return self.data_dirname / "formula_images_processed"
+        return self.data_dirname / self.image_folder_name
 
     def setup(self, stage: Optional[str] = None) -> None:
         """Load images and formulas, and assign them to a `torch Dataset`.
@@ -65,7 +72,7 @@ class Im2Latex(LightningDataModule):
         if stage in ("fit", None):
             train_image_names, train_formulas = get_split(
                 self.all_formulas,
-                self.data_dirname / "im2latex_train_filter.lst",
+                self.data_dirname / "train.lst",
             )
             self.train_dataset = BaseDataset(
                 self.processed_images_dirname,
@@ -76,7 +83,7 @@ class Im2Latex(LightningDataModule):
 
             val_image_names, val_formulas = get_split(
                 self.all_formulas,
-                self.data_dirname / "im2latex_validate_filter.lst",
+                self.data_dirname / "validate.lst",
             )
             self.val_dataset = BaseDataset(
                 self.processed_images_dirname,
@@ -88,7 +95,7 @@ class Im2Latex(LightningDataModule):
         if stage in ("test", None):
             test_image_names, test_formulas = get_split(
                 self.all_formulas,
-                self.data_dirname / "im2latex_test_filter.lst",
+                self.data_dirname / "test.lst",
             )
             self.test_dataset = BaseDataset(
                 self.processed_images_dirname,
@@ -97,8 +104,30 @@ class Im2Latex(LightningDataModule):
                 transform=self.transform["val/test"],
             )
 
+    # added by gauravs ==================>>>
+    def controlling_length(self, formulas):
+        max_len = self.max_output_len
+        pad_idx = 0   # taking from vocab.json
+        trimmed_formulas = []
+
+        for b in range(len(formulas)):
+            if len(formulas[b]) > max_len:
+                trimmed_formulas.append(formulas[b][:max_len])
+            else:
+                trimmed_formulas.append(formulas[b][:len(formulas[b])])
+
+        return trimmed_formulas
+
     def collate_fn(self, batch):
         images, formulas = zip(*batch)
+
+        """
+        added by gauravs ===================>>
+        condition to take equation of any length
+        trim it down to max length if it exceeds it
+        """
+        formulas = self.controlling_length(formulas)
+
         B = len(images)
         max_H = max(image.shape[1] for image in images)
         max_W = max(image.shape[2] for image in images)
