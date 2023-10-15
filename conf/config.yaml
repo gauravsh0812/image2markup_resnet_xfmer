@@ -44,7 +44,7 @@ lit_model:
   nhead: 4
   dropout: 0.3
   num_decoder_layers: 3
-  max_output_len: 150
+  max_output_len: 200
 
 logger:
   project: "image-to-latex"
