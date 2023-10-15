@@ -30,7 +30,7 @@ args = parser.parse_args()
 
 DATA_DIRNAME = args.data_path
 PROCESSED_IMAGES_DIRNAME = f"{DATA_DIRNAME}/{args.images_folder_name}"
-VOCAB_FILE = f"{DATA_DIRNAME}/vocab.json"
+VOCAB_FILE = f"{DATA_DIRNAME}/{args.equations_file_name}_vocab.json"
 CLEANED_FILE = f"{args.equations_file_name}"
 
 

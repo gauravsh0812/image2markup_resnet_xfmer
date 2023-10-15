@@ -63,7 +63,7 @@ The results will be printed to the console.
 
 python3 scripts/prepare_data.py \
 --data_path "/home/gauravs/data/resnet_xfmer" \
---image_path "im2images" \
+--images_folder_name "im2images" \
 --equations_file_name "im2latex.lst"
 
 ```
