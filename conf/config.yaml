@@ -1,8 +1,8 @@
 seed: 1234
 
 trainer:
-  gpus: [4, 5]
-  accelerator: "ddp"
+  gpus: [5]
+  # accelerator: "gpu"
   overfit_batches: 0.0
   check_val_every_n_epoch: 2
   fast_dev_run: False
