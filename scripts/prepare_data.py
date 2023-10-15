@@ -13,12 +13,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument(
     "--images_folder_name",
     help="images folder name in data folder",
-    default="images_processed",
+    default="oimages",
 )
 parser.add_argument(
     "--equations_file_name",
     help="equations file name in the data folder",
-    default="im2latex.lst",
+    default="olatex.lst",
 )
 parser.add_argument(
     "--data_path",
