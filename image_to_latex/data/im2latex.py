@@ -27,6 +27,9 @@ class Im2Latex(LightningDataModule):
         num_workers: int = 0,
         pin_memory: bool = False,
         max_output_len: int,
+        data_dirname,
+        equations_file_name,
+        images_folder_name,
     ) -> None:
 
         super().__init__()
