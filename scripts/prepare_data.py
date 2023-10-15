@@ -45,6 +45,7 @@ def main():
     tokenizer = Tokenizer()
     tokenizer.train(train_formulas)
     tokenizer.save(VOCAB_FILE)
+    print("Done!")
 
 
 if __name__ == "__main__":
