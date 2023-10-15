@@ -29,9 +29,6 @@ data:
   batch_size: 32
   num_workers: 16
   pin_memory: false
-  data_dirname: "/home/gauravs/data/resnet_xfmer"
-  equations_file_name: "im2latex.lst"
-  images_folder_name: "im2images"
   max_output_len: 200
 
 lit_model:

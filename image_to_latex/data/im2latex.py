@@ -23,9 +23,6 @@ class Im2Latex(LightningDataModule):
 
     def __init__(
         self,
-        data_dirname: str,
-        equations_file_name: str,
-        images_folder_name: str,
         batch_size: int = 8,
         num_workers: int = 0,
         pin_memory: bool = False,
@@ -36,10 +33,11 @@ class Im2Latex(LightningDataModule):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.pin_memory = pin_memory
-        self.data_dirname = data_dirname
-        self.images_folder_name = images_folder_name
-        self.equations_file_name = equations_file_name
         self.max_output_len = max_output_len
+
+        self.data_dirname: "/home/gauravs/data/resnet_xfmer"
+        self.equations_file_name: "im2latex.lst"
+        self.images_folder_name: "im2images"
 
         self.vocab_file = "vocab.json"
         formula_file = self.data_dirname / self.equations_file_name
