@@ -29,9 +29,9 @@ parser.add_argument(
 args = parser.parse_args()
 
 DATA_DIRNAME = args.data_path
-PROCESSED_IMAGES_DIRNAME = DATA_DIRNAME / f"{args.images_folder_name}"
+PROCESSED_IMAGES_DIRNAME = DATA_DIRNAME / args.images_folder_name
 VOCAB_FILE = "vocab.json"
-CLEANED_FILE = f"{args.equations_file_name}"
+CLEANED_FILE = args.equations_file_name
 
 
 def main():
