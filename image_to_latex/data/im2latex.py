@@ -20,7 +20,7 @@ class Im2Latex(LightningDataModule):
         pin_memory: If True, the data loader will copy Tensors into CUDA pinned memory
             before returning them.
     """
-
+    
     def __init__(
         self,
         batch_size: int = 8,
