@@ -36,8 +36,8 @@ class Im2Latex(LightningDataModule):
         self.max_output_len = max_output_len
 
         self.data_dirname =  "/home/gauravs/data/resnet_xfmer"
-        self.equations_file_name = "im2mml.lst"
-        self.images_folder_name = "im2images"
+        self.equations_file_name = "omml.lst"
+        self.images_folder_name = "oimages"
 
         self.vocab_file = f"{self.equations_file_name}_vocab.json"
         formula_file = self.data_dirname / self.equations_file_name
