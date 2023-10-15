@@ -11,7 +11,7 @@ from image_to_latex.data.utils import Tokenizer, get_all_formulas, get_split
 # opening config file
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--image_path",
+    "--images_folder_name",
     help="images folder name in data folder",
     default="images_processed",
 )
