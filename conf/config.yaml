@@ -32,6 +32,7 @@ data:
   data_dirname: "/home/gauravs/data/resnet_xfmer"
   equations_file_name: "im2latex.lst"
   image_folder_name: "im2images"
+  max_output_len: 200
 
 lit_model:
   # Optimizer

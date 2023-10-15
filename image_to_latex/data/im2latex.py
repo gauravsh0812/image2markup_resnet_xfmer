@@ -26,9 +26,10 @@ class Im2Latex(LightningDataModule):
         batch_size: int = 8,
         num_workers: int = 0,
         pin_memory: bool = False,
-        data_dirname: str,
-        equations_file_name: str,
-        image_folder_name: str
+        data_dirname: str = "",
+        equations_file_name: str = "",
+        image_folder_name: str = "",
+        max_output_len: int = 150,
     ) -> None:
         super().__init__()
         self.batch_size = batch_size
@@ -37,6 +38,7 @@ class Im2Latex(LightningDataModule):
         self.data_dirname = data_dirname
         self.images_folder_name = images_folder_name
         self.equations_file_name = equations_file_name
+        self.max_output_len = max_output_len
 
         self.vocab_file = "vocab.json"
         formula_file = self.data_dirname / self.equations_file_name
