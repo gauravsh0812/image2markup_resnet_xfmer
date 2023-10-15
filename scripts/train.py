@@ -14,7 +14,8 @@ from image_to_latex.lit_models import LitResNetTransformer
 @hydra.main(config_path="../conf", config_name="config")
 def main(cfg: DictConfig):
 
-    print("config: ", **cfg.data)
+    for i in **cfg.data:
+        print(i)
 
     datamodule = Im2Latex(**cfg.data)
     datamodule.setup()
