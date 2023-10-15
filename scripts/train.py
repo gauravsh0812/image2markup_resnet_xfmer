@@ -17,7 +17,16 @@ def main(cfg: DictConfig):
     for key, value in cfg.data.items():
         print(f"{key}: {value}")
 
-    datamodule = Im2Latex(**cfg.data)
+    datamodule = Im2Latex(
+                    cfg.data.data_dirname,
+                    cfg.data.equations_file_name,
+                    cfg.data.images_folder_name,
+                    cfg.data.batch_size,
+                    cfg.data.num_workers,
+                    cfg.data.pin_memory,
+                    cfg.data.max_output_len
+    )
+
     datamodule.setup()
 
     lit_model = LitResNetTransformer(**cfg.lit_model)
