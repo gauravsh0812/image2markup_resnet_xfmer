@@ -24,8 +24,8 @@ def main() -> None:
     parser.add_argument(
         "--run_path",
         type=str,
-        default="adioss/image-to-latex/yd1cadrl",
-        help="Run path. Defaults to adioss/image-to-latex/yd1cadrl",
+        default="gauravsh0812/image-to-latex/safe5lnb",
+        help="path of model checkpointon WnadB",
     )
     args = parser.parse_args()
     print(args)
