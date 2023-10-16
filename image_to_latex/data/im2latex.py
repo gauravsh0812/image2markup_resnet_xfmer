@@ -27,6 +27,9 @@ class Im2Latex(LightningDataModule):
         num_workers: int = 0,
         pin_memory: bool = False,
         max_output_len: int = 200,
+        data_dirname: str = "/home/gauravs/data/resnet_xfmer",
+        equations_file_name: str = "omml.lst",
+        images_folder_name: str = "images",
     ) -> None:
 
         super().__init__()
@@ -35,9 +38,9 @@ class Im2Latex(LightningDataModule):
         self.pin_memory = pin_memory
         self.max_output_len = max_output_len
 
-        # self.data_dirname =  "/home/gauravs/data/resnet_xfmer"
-        # self.equations_file_name = "omml.lst"
-        # self.images_folder_name = "oimages"
+        self.data_dirname =  data_dirname#"/home/gauravs/data/resnet_xfmer"
+        self.equations_file_name = equations_file_name#"omml.lst"
+        self.images_folder_name = images_folder_name#"oimages"
 
         self.vocab_file = f"{self.equations_file_name}_vocab.json"
         formula_file = self.data_dirname / self.equations_file_name
